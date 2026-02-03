@@ -1,0 +1,33 @@
+seed: 42
+
+model:
+  name_or_path: "REPLACE_ME"
+  load_in_4bit: false
+  torch_dtype: "float16"
+  attn_implementation: "sdpa"
+
+data:
+  train_path: "data/processed/envqa_train.jsonl"
+  dev_path: "data/processed/envqa_dev.jsonl"
+  general_path: "data/processed/general_anchors.jsonl"
+  max_length: 768
+
+train:
+  output_dir: "outputs/lora_smoke"
+  num_train_epochs: 1
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.03
+  max_grad_norm: 1.0
+  logging_steps: 10
+  eval_steps: 50
+  save_steps: 50
+  save_total_limit: 2
+
+method:
+  name: "lora"
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: ["q_proj","k_proj","v_proj","o_proj","up_proj","down_proj","gate_proj"]

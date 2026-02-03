@@ -1,0 +1,32 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading checkpoint shards:   0%|                                                                                                                                                 | 0/4 [00:00<?, ?it/s]
+Loading checkpoint shards:  25%|██████████████████████████████████▎                                                                                                      | 1/4 [00:00<00:02,  1.04it/s]
+Loading checkpoint shards:  50%|████████████████████████████████████████████████████████████████████▌                                                                    | 2/4 [00:01<00:01,  1.13it/s]
+Loading checkpoint shards:  75%|██████████████████████████████████████████████████████████████████████████████████████████████████████▊                                  | 3/4 [00:02<00:00,  1.13it/s]
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:03<00:00,  1.18it/s]
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:03<00:00,  1.16it/s]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+
+BASE=/root/.cache/huggingface/hub/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28
+ADAPTER=outputs/envgpt_qwen2p5_7b_lora
+[1] loading tokenizer...
+[1] done. elapsed=0.2s
+[cfg] dtype=torch.bfloat16
+[2] loading base model...
+[2] done. elapsed=3.7s
+[3] loading LoRA adapter...
+[3] done. elapsed=0.6s
+[4] generating...
+[4] done. elapsed=5.2s
+
+=== OUTPUT ===
+Key operating parameters for anaerobic dark fermentation hydrogen production include:
+1. pH: Maintaining optimal pH levels (5.0-6.5) is crucial for hydrogen-producing bacteria.
+2. Temperature: Mesophilic (30-35°C) and thermophilic (50-60°C) conditions are commonly used.
+3. Hydraulic retention time (HRT): Short HRTs (1-4 days) favor hydrogen production over methane.
+4. Organic loading rate (OLR): Balancing OLR with substrate concentration to avoid inhibition.
+5. Substrate type and composition: Utilizing appropriate feedstocks like organic waste, wastewater, or
+lignocellulosic materials.
+6. Inoculum type and pretreatment: Using mixed cultures and applying heat
+

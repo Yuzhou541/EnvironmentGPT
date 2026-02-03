@@ -1,0 +1,49 @@
+import os, torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
+
+base = os.environ["BASE_MODEL"]
+adapter = os.environ["ADAPTER_DIR"]
+
+tok = AutoTokenizer.from_pretrained(base, trust_remote_code=True, local_files_only=True)
+if tok.pad_token is None:
+    tok.pad_token = tok.eos_token
+
+dtype = torch.bfloat16 if (torch.cuda.is_available() and torch.cuda.get_device_capability(0)[0] >= 8) else torch.float16
+
+prompt = """You are advising an engineer running an anaerobic dark fermentation H2 reactor.
+Return a structured checklist with:
+(1) parameter name,
+(2) typical target range,
+(3) how to monitor it,
+(4) what happens if it's too high/low,
+(5) practical control actions.
+Cover at least: pH, temperature, HRT, OLR, substrate/COD, inoculum pretreatment, ORP, VFA/alkalinity, nutrients, mixing, and key inhibitors."""
+
+messages = [
+    {"role":"system","content":"You are an environmental engineering expert."},
+    {"role":"user","content":prompt},
+]
+text = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = tok(text, return_tensors="pt").to("cuda" if torch.cuda.is_available() else "cpu")
+
+def gen(m):
+    # clear irrelevant sampling fields when do_sample=False (avoid warning)
+    if getattr(m, 'generation_config', None) is not None:
+        m.generation_config.temperature = None
+        m.generation_config.top_p = None
+        m.generation_config.top_k = None
+    with torch.no_grad():
+        out = m.generate(**inputs, max_new_tokens=2600, do_sample=False)
+    return tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True).strip()
+
+base_model = AutoModelForCausalLM.from_pretrained(
+    base, trust_remote_code=True, local_files_only=True, dtype=dtype, device_map="auto"
+).eval()
+
+print("\n===== BASE ONLY =====\n")
+print(gen(base_model))
+
+lora_model = PeftModel.from_pretrained(base_model, adapter, device_map="auto").eval()
+print("\n===== BASE + LORA =====\n")
+print(gen(lora_model))

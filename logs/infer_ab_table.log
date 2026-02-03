@@ -1,0 +1,44 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading checkpoint shards:   0%|                                                                                                                                                 | 0/4 [00:00<?, ?it/s]
+Loading checkpoint shards:  25%|██████████████████████████████████▎                                                                                                      | 1/4 [00:00<00:02,  1.02it/s]
+Loading checkpoint shards:  50%|████████████████████████████████████████████████████████████████████▌                                                                    | 2/4 [00:01<00:01,  1.11it/s]
+Loading checkpoint shards:  75%|██████████████████████████████████████████████████████████████████████████████████████████████████████▊                                  | 3/4 [00:02<00:00,  1.13it/s]
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:03<00:00,  1.17it/s]
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:03<00:00,  1.14it/s]
+
+
+===== BASE ONLY (TABLE) =====
+
+| Parameter              | Typical target range (with units) | Monitoring          | High/low effects                                            | Practical control actions                                      |
+|------------------------|-----------------------------------|---------------------|-------------------------------------------------------------|---------------------------------------------------------------|
+| pH                     | 6.5-7.5                           | Continuous          | Low pH reduces H<sub>2</sub> yield; high pH inhibits methanogens | Adjust alkalinity or acid addition                            |
+| Temperature            | 30-35°C                           | Regular             | Low temp slows metabolism; high temp may denature enzymes     | Maintain thermal insulation and cooling if needed             |
+| HRT                    | 3-5 days                          | Periodic            | Too short limits microbial growth; too long reduces efficiency| Extend retention time if necessary                             |
+| OLR                    | 1-3 kg COD/m<sup>3</sup>·d        | Continuous          | High OLR reduces H<sub>2</sub> yield; low OLR decreases throughput | Optimize feed rate and volume                                 |
+| Substrate/COD          | 10-20 g/L                         | Regular             | Insufficient substrate limits production; excess causes inhibition | Balance feedstock input                                        |
+| Inoculum pretreatment  | Anaerobic acclimation             | Pre-operation       | Improper pretreatment affects performance                    | Ensure proper acclimation                                     |
+| ORP                    | -200 to -400 mV                   | Continuous          | Deviations indicate metabolic changes                        | Investigate and adjust conditions                             |
+| VFA/alkalinity         | 100-300 mg/L                      | Regular             | High VFAs inhibit growth; low alkalinity reduces buffering    | Add buffer or adjust feedstock                               |
+| N/P                    | 20/1                              | Periodic            | Imbalance affects microbial activity                         | Adjust nutrient ratios                                        |
+| Trace metals           | As per standard media             | Periodic            | Deficiencies limit enzyme function                            | Supplement as needed                                          |
+| Mixing                 | Adequate                          | Continuous          | Poor mixing reduces mass transfer                             | Ensure proper agitation                                        |
+| Key inhibitors         | Minimize NH<sub>3</sub>, S<sub>2</sub><sup>-</sup>, heavy metals, O<sub>2</sub> | Continuous          | Inhibitors reduce productivity                                | Implement barriers and controls                               |
+END
+
+===== BASE + LORA (TABLE) =====
+
+Parameter | Typical target range (with units) | Monitoring | High/low effects | Practical control actions
+---|---|---|---|---
+pH | 5.0–6.0 | pH meter | Low pH can inhibit H2 production; high pH can lead to methanogenesis | Adjust pH using alkali or acid addition
+Temperature | 35–40°C | Thermocouple | Low temp. inhibits bacteria; high temp. can cause washout | Control reactor temperature via heating or cooling
+HRT | 1–10 days | Flowmeter | Long HRT reduces biomass washout; short HRT increases H2 yield | Adjust HRT based on organic loading rate and biomass retention
+OLR | 1–10 kg COD/m³·d | COD analyzer | High OLR can reduce H2 yield; low OLR can increase H2 yield | Monitor OLR and adjust feedstock composition or HRT
+Substrate/COD | 10–30 g/L | COD analyzer | High substrate concentration can reduce H2 yield; low substrate concentration can limit H2 production | Adjust substrate concentration based on OLR and HRT
+Inoculum pretreatment | Heat shock, acid treatment | N/A | Inhibits methanogens; enhances H2-producing bacteria | Apply appropriate pretreatment method based on inoculum source
+ORP | -200 to -400 mV | ORP meter | High ORP can promote methanogenesis; low ORP can enhance H2 production | Control ORP using external electrodes or chemical additives
+VFA/alkalinity | 1000–3000 mg/L; alkalinity > VFA | VFA/alkalinity analyzer | High VFA/alkalinity ratio can indicate process instability; low VFA/alkalinity ratio can limit H2 production | Monitor VFA/alkalinity ratio and adjust pH if necessary
+Nutrients (N,P,trace metals) | 100–300 mg/L; trace amounts | Nutrient analyzer | Nutrient deficiency can limit H2 production; excess nutrients can promote methanogenesis | Add nutrients as needed based on nutrient analysis
+Mixing | 10–50 rpm | Tachometer | Insufficient mixing can limit H2 production; excessive mixing can promote methanogenesis | Adjust mixing speed based on reactor configuration and H2 yield
+Key inhibitors (NH3, sulfide, heavy metals, salinity, O2 intrusion) | < 100 mg/L | Analytical methods | Inhibitors can limit H2 production; remove or dilute inhibitors as needed | Monitor inhibitor levels and take appropriate action if necessary
+
